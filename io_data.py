@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 def input_notes():
-    pass
+    print("Здесь вводим заметку")
 
 def output_notes():
-    pass
+    print("Здесь выводим существующую заметку")
 
 def edit_notes():
-    pass
+    print("Здесь редактируем заметку")
 
 def del_notes():
-    pass
+    print("Здесь удаляем заметку")
