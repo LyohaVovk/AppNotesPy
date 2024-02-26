@@ -9,7 +9,7 @@ def main_screen():
     command = input("Введите команду => ")
     while command != '5':
         
-        while command != '1' and command != '2' and command != '3' and command != '4':
+        while command != '0' and command != '1' and command != '2' and command != '3' and command != '4':
             print("Введена неподдерживаемая команда! \n Попробуйте еще раз.")
             command = input("Введите команду => ")
             
