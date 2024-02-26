@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from sys import exit
+from interface import clear_screen, menu
 from io_data import input_notes, output_notes, edit_notes, del_notes
 
-def interface():
-    print("Добро пожаловать в AppNotes")
-    print("1. - Создать заметку;\n2. - Редактировать заметку;\n3. - Вывод заметок;\n4. - Удаление заметок;\n5. - Выход из программы")
-    command = input("Введите команду: ")
+def main_screen():
+    command = menu()
     
     while command != '1' and command != '2' and command != '3' and command != '4' and command != '5':
         print("Введена неподдерживаемая команда! \n Попробуйте еще раз.")
