@@ -15,10 +15,18 @@ def output_notes():
         notes_string = f.read()
         records = json.loads(notes_string)
         for key, value in records.items():
+            print(f'UID: {key}')
             record = value
             for key, value in record.items():
-                print(f'{key} = {value}')
-        
+                if key == 'title':
+                    print(f'{value}')
+                elif key == 'note':
+                    print(f'    {value}')
+                elif key == 'createDT':
+                    print(f'                    Заметка создана: {value}')
+                elif key == 'lastChangeDT':
+                    print(f'                    Заметка изменена: {value}\n')    
+            # print("")
     command = '0'
     return command
 
