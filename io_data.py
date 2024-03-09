@@ -12,6 +12,7 @@ def read_dict_from_file():
     return records
 
 def write_dict_to_file(new_dict):
+    """Запись объекта json а файл"""
     with open('Notes.json', 'w', encoding='utf-8') as f:
         json.dump(new_dict, f)
 
@@ -27,6 +28,9 @@ def get_DT():
     curr_dt = datetime.now().isoformat(sep=' ')
     return curr_dt
 
+def get_UID(notes_dict):
+    pass
+
 def get_next_UID(notes_dict):
     uid_list = []
     for key in notes_dict.keys():  
@@ -35,7 +39,12 @@ def get_next_UID(notes_dict):
     next_uid = int(uid_list[-1]) + 1
     return next_uid
 
+def input_UID():
+    UID = input("Введите идентификатор заметки: \n")
+    return UID
+
 def input_notes():
+    """Функция ввода заметок"""
     tp.records_template['title'] = input_title()
     tp.records_template['note'] = input_text()
     records = read_dict_from_file()        
@@ -47,30 +56,63 @@ def input_notes():
     return command
 
 def output_notes():
-    # print("Здесь выводим существующую заметку")
+    """Функция вывода заметок"""
     records = read_dict_from_file()
-    for key, value in records.items():
-        print(f'UID: {key}')
-        record = value
-        for key, value in record.items():
-            if key == 'title':
-                print(f'{value}')
-            elif key == 'note':
-                print(f'    {value}')
-            elif key == 'createDT':
-                print(f'                    Заметка создана: {value}')
-            elif key == 'lastChangeDT':
-                print(f'                    Заметка изменена: {value}\n')    
-            # print("")
+    variants = input("Введите идентификатор заметки для вывода или нажмите Enter для вывода всех заметок: ")
+    if variants == "":
+        for key, value in records.items():
+            print(f'UID: {key}')
+            record = value
+            for key, value in record.items():
+                if key == 'title':
+                    print(f'{value}')
+                elif key == 'note':
+                    print(f'    {value}')
+                elif key == 'createDT':
+                    print(f'                    Заметка создана: {value}')
+                elif key == 'lastChangeDT':
+                    print(f'                    Заметка изменена: {value}\n')
+    else:
+        if variants in records.keys():
+            print(f'UID: {variants}')
+            record = records[variants]
+            for key, value in record.items():
+                if key == 'title':
+                    print(f'{value}')
+                elif key == 'note':
+                    print(f'    {value}')
+                elif key == 'createDT':
+                    print(f'                    Заметка создана: {value}')
+                elif key == 'lastChangeDT':
+                    print(f'                    Заметка изменена: {value}\n')
+        else:
+            print("Нет такого идентификатора!")
+            
     command = '0'
     return command
 
+def find_notes():
+    """Функция поиска заметок по времени или идентификатору"""
+    pass
+
 def edit_notes():
-    print("Здесь редактируем заметку")
+    """Функция редактирования заметок"""
+    records = read_dict_from_file()
+    UID = input_UID()
+    record = records[UID]
+    record['note'] = input_text()
+    record['lastChangeDT'] = get_DT()
+    
+    records[UID] = record    
+    write_dict_to_file(records)
     command = '0'
     return command
 
 def del_notes():
-    print("Здесь удаляем заметку")
+    """Функция удаления заметок"""
+    records = read_dict_from_file()
+    UID = input_UID()
+    del records[UID]
+    write_dict_to_file(records)
     command = '0'
     return command
