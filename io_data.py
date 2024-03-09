@@ -6,6 +6,13 @@ def input_text():
     text = input("Введите текст заметки: \n")
     return text
 
+def get_DT():
+    curr_dt = datetime.now().isoformat(sep=' ')
+    return curr_dt
+
+def get_UID():
+    pass
+
 def input_notes():
     # print("Здесь вводим заметку")
     
