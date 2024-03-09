@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 import json
+import template as tp
 
 def read_dict_from_file():
     """Чтение объекта json из файла в словарь"""
@@ -10,8 +11,9 @@ def read_dict_from_file():
         
     return records
 
-def write_dict_to_file():
-    pass
+def write_dict_to_file(new_dict):
+    with open('Notes.json', 'w', encoding='utf-8') as f:
+        json.dump(new_dict, f)
 
 def input_title():
     title = input("Введите заголовок заметки: \n")
@@ -34,15 +36,13 @@ def get_next_UID(notes_dict):
     return next_uid
 
 def input_notes():
-    new_title = input_title()
-    new_note = input_text()
+    tp.records_template['title'] = input_title()
+    tp.records_template['note'] = input_text()
     records = read_dict_from_file()        
     new_UID = get_next_UID(records)
-    create_DT = get_DT()
-    for 
-    
-    # print("Здесь вводим заметку")
-    
+    tp.records_template['createDT'] = get_DT()                 
+    records[new_UID] = tp.records_template    
+    write_dict_to_file(records)    
     command = '0'
     return command
 
