@@ -2,6 +2,9 @@
 from datetime import datetime
 import json
 
+def input_text():
+    text = input("Введите текст заметки: \n")
+    return text
 
 def input_notes():
     # print("Здесь вводим заметку")
