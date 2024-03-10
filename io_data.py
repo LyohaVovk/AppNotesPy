@@ -93,7 +93,30 @@ def output_notes():
 
 def find_notes():
     """Функция поиска заметок по времени или идентификатору"""
-    pass
+    start_DT = input("Введите дату, с которой надо начать поиск заметок(в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС): ")
+    stop_DT = input("Введите дату, до которой нужно искать заметки(в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС): ")
+    start_date = datetime.strptime(start_DT, '%Y-%m-%d %H:%M:%S')
+    stop_date = datetime.strptime(stop_DT, '%Y-%m-%d %H:%M:%S')
+    records = read_dict_from_file()
+    for key, value in records.items():
+        record = value
+        note_time = datetime.strptime(record["createDT"], '%Y-%m-%d %H:%M:%S.%f')
+        if note_time > start_date and note_time < stop_date:
+            print(f'UID: {key}')
+            for key, value in record.items():
+                if key == 'title':
+                    print(f'{value}')
+                elif key == 'note':
+                    print(f'    {value}')
+                elif key == 'createDT':
+                    print(f'                    Заметка создана: {value}')
+                elif key == 'lastChangeDT':
+                    print(f'                    Заметка изменена: {value}\n')
+        else:
+            print("Заметки в это время не содавались!")
+             
+    command = '0'
+    return command
 
 def edit_notes():
     """Функция редактирования заметок"""
